@@ -15,7 +15,7 @@
     type: dword
   loop:
     - ShowCortanaButton
-    - ShowTaskViewButton
+    # - ShowTaskViewButton
     - TaskbarDa
     - TaskbarMn
 
