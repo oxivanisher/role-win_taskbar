@@ -34,8 +34,8 @@
     data: 0
     type: dword
 
-- name: Ensure 'Edge', 'Store' other built-in shortcuts unpinned from Taskbar.
-  ansible.windows.win_regedit:
-    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband
-    name: Favorites
-    state: absent
+# - name: Ensure 'Edge', 'Store' other built-in shortcuts unpinned from Taskbar.
+#   ansible.windows.win_regedit:
+#     path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband
+#     name: Favorites
+#     state: absent
