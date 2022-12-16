@@ -39,4 +39,3 @@
     path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband
     name: Favorites
     state: absent
-
