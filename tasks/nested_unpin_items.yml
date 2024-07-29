@@ -1,0 +1,16 @@
+---
+
+- name: Unpin Microsift taskbar items
+  ansible.windows.win_regedit:
+    hive: "C:\\Users\\{{ loop_user }}\\NTUSER.dat"
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: "{{ loop_item }}"
+    data: 0
+    type: dword
+  loop:
+    - ShowCortanaButton
+    - TaskbarDa
+    - TaskbarMn
+    - ShowCopilotButton
+  loop_control:
+    loop_var: loop_item

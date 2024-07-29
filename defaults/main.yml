@@ -1,2 +1,5 @@
 ---
 # defaults file for win_taskbar
+win_taskbar_users:
+  - Default
+  - "{{ ansibe_user }}"
