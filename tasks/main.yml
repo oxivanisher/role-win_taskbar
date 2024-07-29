@@ -2,7 +2,7 @@
 - name: Ensure 'Search' unpinned from Taskbar for win_taskbar_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
-    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Search
+    path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Search
     name: SearchboxTaskbarMode
     data: 0
     type: dword
@@ -19,7 +19,7 @@
 - name: Ensure 'People' unpinned from Taskbar for win_taskbar_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
-    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People
+    path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People
     name: PeopleBand
     data: 0
     type: dword
@@ -36,7 +36,7 @@
 - name: Ensure 'News and Interests' unpinned from Taskbar for win_taskbar_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
-    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds
+    path: HKLM:\ANSIBLE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds
     name: EnableFeeds
     data: 0
     type: dword
