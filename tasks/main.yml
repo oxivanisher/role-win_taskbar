@@ -1,5 +1,5 @@
 ---
-- name: Ensure 'Search' unpinned from Taskbar
+- name: Ensure 'Search' unpinned from Taskbar for win_taskbar_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
     path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Search
@@ -8,13 +8,15 @@
     type: dword
   loop: "{{ win_taskbar_users }}"
 
-- name: Unpin Microsift taskbar items per user
-  ansible.builtin.include_tasks: nested_unpin_items.yml
-  loop: "{{ win_taskbar_users }}"
-  loop_control:
-    loop_var: loop_user
+- name: Ensure 'Search' unpinned from Taskbar for ansible_user
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Search
+    name: SearchboxTaskbarMode
+    data: 0
+    type: dword
+  when: win_taskbar_also_for_ansible_user | bool
 
-- name: Ensure 'People' unpinned from Taskbar
+- name: Ensure 'People' unpinned from Taskbar for win_taskbar_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
     path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People
@@ -23,7 +25,15 @@
     type: dword
   loop: "{{ win_taskbar_users }}"
 
-- name: Ensure 'News and Interests' unpinned from Taskbar
+- name: Ensure 'People' unpinned from Taskbar for ansible_user
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People
+    name: PeopleBand
+    data: 0
+    type: dword
+  when: win_taskbar_also_for_ansible_user | bool
+
+- name: Ensure 'News and Interests' unpinned from Taskbar for win_taskbar_users
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
     path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds
@@ -32,6 +42,35 @@
     type: dword
     state: present
   loop: "{{ win_taskbar_users }}"
+
+- name: Ensure 'News and Interests' unpinned from Taskbar for ansible_user
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds
+    name: EnableFeeds
+    data: 0
+    type: dword
+    state: present
+  when: win_taskbar_also_for_ansible_user | bool
+
+- name: Unpin Microsift taskbar items per user for win_taskbar_users
+  ansible.builtin.include_tasks: nested_unpin_items.yml
+  loop: "{{ win_taskbar_users }}"
+  loop_control:
+    loop_var: loop_user
+
+- name: Unpin Microsift taskbar items for ansible_user
+  ansible.windows.win_regedit:
+    path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
+    name: "{{ loop_item }}"
+    data: 0
+    type: dword
+  loop:
+    - ShowCortanaButton
+    - TaskbarDa
+    - TaskbarMn
+    - ShowCopilotButton
+  loop_control:
+    loop_var: loop_item
 
 # - name: Ensure 'Edge', 'Store' other built-in shortcuts unpinned from Taskbar
 #   ansible.windows.win_regedit:
