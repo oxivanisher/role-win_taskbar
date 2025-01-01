@@ -52,6 +52,25 @@
     state: present
   when: win_taskbar_also_for_ansible_user | bool
 
+- name: Ensure 'Widgets (Weather and News)' unpinned from Taskbar for win_taskbar_users
+  ansible.windows.win_regedit:
+    hive: "C:\\Users\\{{ item }}\\NTUSER.dat"
+    path: HKLM:\ANSIBLE\SOFTWARE\Policies\Microsoft\Dsh
+    name: AllowNewsAndInterests
+    data: 0
+    type: dword
+    state: present
+  loop: "{{ win_taskbar_users }}"
+
+- name: Ensure 'Widgets (Weather and News)' unpinned from Taskbar for ansible_user
+  ansible.windows.win_regedit:
+    path: HKLM:\SOFTWARE\SOFTWARE\Policies\Microsoft\Dsh
+    name: AllowNewsAndInterests
+    data: 0
+    type: dword
+    state: present
+  when: win_taskbar_also_for_ansible_user | bool
+
 - name: Unpin Microsoft taskbar items per user for win_taskbar_users
   ansible.builtin.include_tasks: nested_unpin_items.yml
   loop: "{{ win_taskbar_users }}"
