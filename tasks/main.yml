@@ -52,13 +52,13 @@
     state: present
   when: win_taskbar_also_for_ansible_user | bool
 
-- name: Unpin Microsift taskbar items per user for win_taskbar_users
+- name: Unpin Microsoft taskbar items per user for win_taskbar_users
   ansible.builtin.include_tasks: nested_unpin_items.yml
   loop: "{{ win_taskbar_users }}"
   loop_control:
     loop_var: loop_user
 
-- name: Unpin Microsift taskbar items for ansible_user
+- name: Unpin Microsoft taskbar items for ansible_user
   ansible.windows.win_regedit:
     path: HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
     name: "{{ loop_item }}"
@@ -71,6 +71,7 @@
     - ShowCopilotButton
   loop_control:
     loop_var: loop_item
+  failed_when: false
 
 # - name: Ensure 'Edge', 'Store' other built-in shortcuts unpinned from Taskbar
 #   ansible.windows.win_regedit:

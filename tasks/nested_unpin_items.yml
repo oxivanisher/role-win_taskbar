@@ -1,6 +1,6 @@
 ---
 
-- name: Unpin Microsift taskbar items
+- name: Unpin Microsoft taskbar items
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ loop_user }}\\NTUSER.dat"
     path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
