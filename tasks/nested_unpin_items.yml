@@ -1,6 +1,6 @@
 ---
 
-- name: Unpin Microsoft taskbar items
+- name: "Unpin Microsoft taskbar items for user {{ loop_user }}"
   ansible.windows.win_regedit:
     hive: "C:\\Users\\{{ loop_user }}\\NTUSER.dat"
     path: HKLM:\ANSIBLE\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced
@@ -8,9 +8,10 @@
     data: 0
     type: dword
   loop:
-    - ShowCortanaButton
-    - TaskbarDa
-    - TaskbarMn
-    - ShowCopilotButton
+    - ShowCortanaButton #  Hide cotrana button
+    - TaskbarDa # Hide Widgets button
+    - TaskbarMn # Hide Chat button
+    - ShowCopilotButton # Hide Copilot button
   loop_control:
     loop_var: loop_item
+  failed_when: false
