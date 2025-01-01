@@ -64,7 +64,7 @@
 
 - name: Ensure 'Widgets (Weather and News)' unpinned from Taskbar for ansible_user
   ansible.windows.win_regedit:
-    path: HKLM:\SOFTWARE\SOFTWARE\Policies\Microsoft\Dsh
+    path: HKLM:\SOFTWARE\Policies\Microsoft\Dsh
     name: AllowNewsAndInterests
     data: 0
     type: dword
