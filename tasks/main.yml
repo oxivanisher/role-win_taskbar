@@ -71,7 +71,6 @@
     - ShowCopilotButton
   loop_control:
     loop_var: loop_item
-  failed_when: false
 
 # - name: Ensure 'Edge', 'Store' other built-in shortcuts unpinned from Taskbar
 #   ansible.windows.win_regedit:
