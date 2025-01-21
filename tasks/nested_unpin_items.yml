@@ -8,7 +8,7 @@
     data: 0
     type: dword
   loop:
-    - ShowCortanaButton #  Hide cotrana button
+    - ShowCortanaButton #  Hide Cortana button
     - TaskbarDa # Hide Widgets button
     - TaskbarMn # Hide Chat button
     - ShowCopilotButton # Hide Copilot button
