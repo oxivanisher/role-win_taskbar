@@ -1,5 +1,6 @@
 win_taskbar
 ===========
+[![Ansible Lint](https://github.com/oxivanisher/role-win_taskbar/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/oxivanisher/role-win_taskbar/actions/workflows/ansible-lint.yml)
 
 Remove unwanted things from the Windows taskbar.
 
